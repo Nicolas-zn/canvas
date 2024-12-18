@@ -60,7 +60,6 @@ function three_logic() {
 let style_list = ['样式1', '样式2']
 let params = {
     style: '样式1',
-    fun: () => { }
 }
 function create_gui() {
     const gui = new GUI()
@@ -70,7 +69,6 @@ function create_gui() {
     gui.domElement.style.top = '0px'
     gui.domElement.style.right = '0px'
     gui.add(params, 'style', [...style_list]).onChange((st) => {
-        console.log(st);
         change_canvas(st)
     })
 }
@@ -91,15 +89,11 @@ function change_canvas(style: string) {
             for (let i = 0; i < text.length; i++) {
                 ctx.fillText(text[i], canvas.width / 2, i * 150 + canvas.height / 5)
             }
-            // canvasCon.value.appendChild(canvas)
-
             break;
         case '样式2':
             ctx.fillStyle = 'pink'
             ctx.fillRect(0, 0, canvas.width, canvas.height)
-
             ctx.clearRect(10, 10, canvas.width - 20, canvas.height - 20)
-
             ctx.textBaseline = 'middle'
             ctx.fillStyle = 'red'
             ctx.font = "bold 80px Arial";
@@ -111,7 +105,6 @@ function change_canvas(style: string) {
             break
         default:
             console.log('没有这个样式');
-
             break;
     }
 

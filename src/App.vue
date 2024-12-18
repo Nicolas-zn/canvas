@@ -21,7 +21,7 @@ const changeComponent = (component: any) => {
 
 let application_list = [
   {
-    component_name: 'fillStyle', application_name: '停车场'
+    component_name: 'parking', application_name: '停车场'
   }
 ]
 
@@ -38,7 +38,7 @@ function get_application_name(name: string) {
 }
 
 onMounted(() => {
-  changeComponent(components['fillStyle.vue'])
+  changeComponent(components['parking.vue'])
 })
 </script>
 
