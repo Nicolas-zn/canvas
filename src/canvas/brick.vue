@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 
 import { utils } from '@/utils';
-import { CanvasTexture, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, RepeatWrapping, Scene, WebGLRenderer } from 'three';
+import { BoxGeometry, CanvasTexture, Mesh, MeshBasicMaterial, PerspectiveCamera, RepeatWrapping, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import { onMounted, ref } from 'vue';
 let canvasCon = ref()
@@ -40,7 +40,7 @@ let scene: Scene, camera: PerspectiveCamera, renderer: WebGLRenderer, controls: 
 function three_logic() {
     let domElement = threeCon.value as HTMLDivElement
     ({ scene, camera, renderer, controls } = utils.initScene(domElement))
-    camera.position.set(0, 10, 0)
+    camera.position.set(15, 15, 20)
     camera.lookAt(0, 0, 0)
     controls.addEventListener('change', () => {
         renderer.render(scene, camera)
@@ -49,7 +49,7 @@ function three_logic() {
     canvas_texture.wrapS = RepeatWrapping
     canvas_texture.wrapT = RepeatWrapping
     canvas_texture.repeat.set(1, 1);
-    const plane = new PlaneGeometry(10, 10)
+    const plane = new BoxGeometry(10, 10, 10)
     plane.rotateX(-Math.PI / 2)
     const material = new MeshBasicMaterial({ map: canvas_texture, side: 2 })
     const mesh = new Mesh(plane, material)
