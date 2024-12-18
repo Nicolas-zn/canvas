@@ -22,6 +22,9 @@ const changeComponent = (component: any) => {
 let application_list = [
   {
     component_name: 'parking', application_name: '停车场'
+  },
+  {
+    component_name: 'brick', application_name: '红砖'
   }
 ]
 
