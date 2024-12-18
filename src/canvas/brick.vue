@@ -1,4 +1,4 @@
-<!-- canvas 绘制文字 -->
+<!-- canvas 红砖 -->
 <script lang="ts" setup>
 
 import { utils } from '@/utils';
