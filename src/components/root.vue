@@ -11,6 +11,7 @@ function draw() {
   canvas = document.createElement('canvas')
   canvas.height = 512
   canvas.width = 300
+  canvasCon.value.appendChild(canvas)
 
 }
 onMounted(() => {
