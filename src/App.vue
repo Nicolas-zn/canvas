@@ -25,6 +25,9 @@ let application_list = [
   },
   {
     component_name: 'brick', application_name: '红砖'
+  },
+  {
+    component_name: 'arrow', application_name: '箭头'
   }
 ]
 
