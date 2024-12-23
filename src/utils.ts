@@ -1,4 +1,4 @@
-import { BoxGeometry, MeshBasicMaterial, Mesh, Scene, WebGLRenderer, PMREMGenerator, AmbientLight, DirectionalLight, PerspectiveCamera } from "three"
+import { BoxGeometry, MeshBasicMaterial, Mesh, Scene, WebGLRenderer, PMREMGenerator, AmbientLight, DirectionalLight, PerspectiveCamera, Color } from "three"
 import { DRACOLoader, GLTFLoader, OrbitControls, RoomEnvironment } from "three/examples/jsm/Addons.js"
 export const utils = {
     initScene: (domElement: HTMLDivElement) => {
@@ -8,6 +8,7 @@ export const utils = {
             controls: OrbitControls;
         let init_scene = () => {
             scene = new Scene();
+            scene.background = new Color("#3f3f3f")
             camera = new PerspectiveCamera(60, domElement.clientWidth / domElement.clientHeight, 1, 1000);
             camera.position.set(0, 5, 20);
             renderer = new WebGLRenderer({ antialias: true });

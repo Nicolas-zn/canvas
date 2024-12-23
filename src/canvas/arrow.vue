@@ -3,7 +3,6 @@
 
 import { utils } from '@/utils';
 import { CanvasTexture, Clock, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, RepeatWrapping, Scene, SRGBColorSpace, WebGLRenderer } from 'three';
-import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import { onMounted, ref } from 'vue';
 let canvasCon = ref()
 let canvas: HTMLCanvasElement
@@ -55,10 +54,10 @@ onMounted(() => {
 // 3d逻辑
 let threeCon = ref()
 let canvas_texture: CanvasTexture
-let scene: Scene, camera: PerspectiveCamera, renderer: WebGLRenderer, controls: OrbitControls
+let scene: Scene, camera: PerspectiveCamera, renderer: WebGLRenderer
 function three_logic() {
     let domElement = threeCon.value as HTMLDivElement
-    ({ scene, camera, renderer, controls } = utils.initScene(domElement))
+    ({ scene, camera, renderer } = utils.initScene(domElement))
     camera.position.set(0, 20, 0)
     camera.lookAt(0, 0, 0)
 

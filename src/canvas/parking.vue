@@ -49,7 +49,7 @@ function three_logic() {
     canvas_texture = new CanvasTexture(canvas)
     const plane = new PlaneGeometry(2.7, 5, 5)
     plane.rotateX(-Math.PI / 2)
-    const material = new MeshBasicMaterial({ map: canvas_texture, side: DoubleSide })
+    const material = new MeshBasicMaterial({ map: canvas_texture, side: DoubleSide, transparent: true })
     canvas_texture.needsUpdate = true
     const mesh = new Mesh(plane, material)
     scene.add(mesh)
@@ -76,6 +76,8 @@ function create_gui() {
 // 样式更改
 function change_canvas(style: string) {
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+    ctx.fillStyle = 'rgb(255, 255, 255,0)'; // 完全透明
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
     let text
     switch (style) {
         case '样式1':

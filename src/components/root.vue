@@ -11,6 +11,8 @@ function draw() {
   canvas = document.createElement('canvas')
   canvas.height = 512
   canvas.width = 300
+  const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+
   canvasCon.value.appendChild(canvas)
 
 }
