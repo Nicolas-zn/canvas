@@ -12,7 +12,6 @@ const components: Record<string, any> = Object.keys(file).reduce((oldValue, newV
   oldValue[newValue.split("/")[len - 1]] = markRaw(c.default as any);
   return oldValue;
 }, init);
-console.log(components);
 
 let current_component = ref()
 const changeComponent = (component: any) => {
