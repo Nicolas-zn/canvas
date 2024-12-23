@@ -18,6 +18,7 @@ export const utils = {
                 camera.aspect = domElement.clientWidth / domElement.clientHeight;
                 camera.updateProjectionMatrix();
                 renderer.setSize(domElement.clientWidth, domElement.clientHeight);
+                renderer.render(scene, camera)
             });
             controls = new OrbitControls(camera, renderer.domElement);
             controls.update()

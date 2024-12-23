@@ -35,6 +35,9 @@ let application_list = [
   {
     component_name: 'dolby', application_name: '杜比音效'
   },
+  {
+    component_name: 'traffic_limit_speed', application_name: '交通-限速标识'
+  },
 ]
 
 function get_application_name(name: string) {
