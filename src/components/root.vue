@@ -4,6 +4,7 @@
 import { utils } from '@/utils';
 import { CanvasTexture, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
+import GUI from 'three/examples/jsm/libs/lil-gui.module.min.js';
 import { onMounted, ref } from 'vue';
 let canvasCon = ref()
 let canvas: HTMLCanvasElement
@@ -19,6 +20,7 @@ function draw() {
 onMounted(() => {
   draw()
   three_logic()
+  create_gui()
 })
 
 // 3d逻辑
@@ -37,6 +39,29 @@ function three_logic() {
 
   canvas_texture = new CanvasTexture(canvas)
   renderer.render(scene, camera)
+}
+
+// Gui逻辑啊
+let params = {
+  log: () => {
+    logCode()
+  }
+}
+function create_gui() {
+  const gui = new GUI()
+  canvasCon.value.appendChild(gui.domElement)
+  gui.title('样式')
+  gui.domElement.style.position = 'relative'
+  gui.domElement.style.top = '0px'
+  gui.domElement.style.right = '0px'
+  gui.add(params, 'log').name('输出此图形绘制代码(console.log())')
+}
+
+function logCode() {
+  let string = draw.toString()
+  string = string.replace(`canvas = document.createElement`, `let canvas = document.createElement`);
+  string = string.replace('canvasCon.value.appendChild(canvas)', 'return canvas')
+  console.log(string);
 }
 </script>
 <template>
