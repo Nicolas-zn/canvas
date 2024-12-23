@@ -13,28 +13,22 @@ function draw() {
     canvas.height = 400
     canvas.width = 400
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
-    drawCrossInCircle(ctx)
+    drawSign(ctx)
     canvasCon.value.appendChild(canvas)
 }
-
-// drawCircle
-function drawCrossInCircle(ctx: CanvasRenderingContext2D) {
-    ctx.lineWidth = 35;
+function drawSign(ctx: CanvasRenderingContext2D) {
+    ctx.lineWidth = 5;
     let circleRadius = canvas.width <= canvas.height ? canvas.width / 2 - ctx.lineWidth : canvas.height / 2 - ctx.lineWidth
-    ctx.arc(canvas.width / 2, canvas.height / 2, circleRadius, Math.PI / 3, Math.PI * 2 + Math.PI / 3)
-    ctx.strokeStyle = "red";
-    ctx.stroke();
     ctx.closePath()
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "red";
     ctx.arc(canvas.width / 2, canvas.height / 2, circleRadius, Math.PI / 3, Math.PI * 2 + Math.PI / 3)
     ctx.fill()
     ctx.closePath()
-    ctx.textBaseline = 'middle'
-    ctx.fillStyle = 'black'
+    ctx.fillStyle = 'white'
+    const white_h = canvas.width / 5
+    const reactX = canvas.width / 7.5
+    ctx.fillRect(reactX, canvas.height / 2 - white_h / 2, canvas.width - reactX * 2, white_h)
 
-    ctx.font = `bold ${canvas.height / 2}px Arial`;
-    ctx.textAlign = 'center'
-    ctx.fillText('80', canvas.width / 2, canvas.height / 2 + (ctx.lineWidth / 2) - 10)
 }
 onMounted(() => {
     draw()
@@ -54,8 +48,6 @@ function three_logic() {
     controls.addEventListener('change', () => {
         renderer.render(scene, camera)
     })
-
-
     canvas_texture = new CanvasTexture(canvas)
     const plane = new PlaneGeometry(5, 5)
     plane.rotateX(-Math.PI / 2)
@@ -85,7 +77,7 @@ function create_gui() {
 function logCode() {
     let string = draw.toString()
     string = string.replace(`canvas = document.createElement`, `let canvas = document.createElement`);
-    string = string.replace(`drawCrossInCircle(ctx)`, `${drawCrossInCircle.toString()} ${drawCrossInCircle.name}()`);
+    string = string.replace(`drawSign(ctx)`, `${drawSign.toString()} ${drawSign.name}()`);
     string = string.replace('canvasCon.value.appendChild(canvas)', 'return canvas')
     console.log(string);
 }

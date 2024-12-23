@@ -38,6 +38,9 @@ let application_list = [
   {
     component_name: 'traffic_limit_speed', application_name: '交通-限速标识'
   },
+  {
+    component_name: 'traffic_forbid_driveIn', application_name: '交通-禁止驶入'
+  },
 ]
 
 function get_application_name(name: string) {
