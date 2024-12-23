@@ -28,7 +28,10 @@ let application_list = [
   },
   {
     component_name: 'arrow', application_name: '箭头'
-  }
+  },
+  {
+    component_name: 'cross', application_name: '十字架'
+  },
 ]
 
 function get_application_name(name: string) {
