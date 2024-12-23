@@ -13,7 +13,73 @@ function draw() {
     canvas = document.createElement('canvas')
     canvas.height = 300
     canvas.width = 300
-    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+    drawStyle(params.style)
+    canvasCon.value.appendChild(canvas)
+}
+
+// drawCircle
+function drawCrossInCircle(ctx: CanvasRenderingContext2D) {
+    // ctx.fillStyle = 'rgb(255, 255, 255,1)'; // 完全透明
+    // ctx.fillRect(0, 0, canvas.width, canvas.height)
+    ctx.lineWidth = 5;
+    let circleRadius = canvas.width <= canvas.height ? canvas.width / 2 - ctx.lineWidth : canvas.height / 2 - ctx.lineWidth
+
+
+    function drawInCross() {
+        // const len = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height)
+        const l1 = circleRadius * Math.cos(Math.PI / 6)
+        const l1_1 = circleRadius * Math.sin(Math.PI / 6)
+        const l2 = circleRadius * Math.cos(Math.PI / 3)
+        const l2_2 = circleRadius * Math.sin(Math.PI / 3)
+        const halfWidth = canvas.width / 2
+        const halfHeight = canvas.height / 2
+        // 第一象限到第三象限
+        let coords = [
+            [halfWidth + l1, halfHeight - l1_1],
+            [halfWidth + l2, halfHeight - l2_2],
+            [halfWidth - l1, halfHeight + l1_1],
+            [halfWidth - l2, halfHeight + l1]
+        ]
+        ctx.moveTo(halfWidth + l1, halfHeight - l1_1)
+        coords.map((item, index) => {
+            if (index > 0) {
+                ctx.lineTo(item[0], item[1])
+            }
+        })
+
+
+        ctx.fillStyle = 'red'
+        ctx.fill()
+        // 第二象限到第四项
+        let coords_2 = [
+            [halfWidth - l1, halfHeight - l1_1],
+            [halfWidth - l2, halfHeight - l2_2],
+            [halfWidth + l1, halfHeight + l1_1],
+            [halfWidth + l2, halfHeight + l2_2],
+        ]
+        ctx.moveTo(halfWidth - l1, halfHeight - l1_1)
+        coords_2.map((item, index) => {
+            if (index > 0) {
+                ctx.lineTo(item[0], item[1])
+            }
+        })
+        ctx.fill()
+        // ctx.restore()
+        ctx.fillStyle = 'blue'
+
+    }
+    drawInCross()
+
+    // ctx.moveTo(0, 0)
+
+    ctx.arc(canvas.width / 2, canvas.height / 2, circleRadius, Math.PI / 3, Math.PI * 2 + Math.PI / 3)
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 5;
+    ctx.stroke();
+}
+
+function drawCross(ctx: CanvasRenderingContext2D) {
+    ctx = canvas.getContext('2d') as CanvasRenderingContext2D
     ctx.fillStyle = 'rgb(255, 255, 255,0)'; // 完全透明
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     ctx.fillStyle = 'red'
@@ -27,9 +93,8 @@ function draw() {
     ctx.lineTo(canvas.width, canvas.height * 2 / 3,)
     ctx.lineTo(canvas.width, canvas.height / 3,)
     ctx.fill()
-    canvasCon.value.appendChild(canvas)
+    /// ctx.save()
 }
-
 onMounted(() => {
     draw()
     three_logic()
@@ -58,9 +123,9 @@ function three_logic() {
     renderer.render(scene, camera)
 }
 // Gui逻辑啊
-let style_list = ['样式1', '样式2']
+let style_list = ['方形', '圆形']
 let params = {
-    style: '样式1',
+    style: '圆形',
     log: () => {
         logCode()
     }
@@ -73,11 +138,38 @@ function create_gui() {
     gui.domElement.style.top = '0px'
     gui.domElement.style.right = '0px'
     gui.add(params, 'log').name('输出此图形绘制代码(console.log())')
+    gui.add(params, 'style', style_list).onChange((v) => {
+        drawStyle(v)
+        canvas_texture.needsUpdate = true
+        renderer.render(scene, camera)
+    })
 }
+let current_draw_fun: any
+function drawStyle(style: string) {
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+    ctx.reset()
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    switch (style) {
+        case "圆形":
+            drawCrossInCircle(ctx)
+            current_draw_fun = drawCrossInCircle
 
+            break;
+        case "方形":
+            drawCross(ctx)
+            current_draw_fun = drawCross
+            break;
+        default:
+            break;
+    }
+
+}
 function logCode() {
+
     let string = draw.toString()
     string = string.replace(`canvas = document.createElement`, `let canvas = document.createElement`);
+    string = string.replace(`drawStyle(params.style)`, `${current_draw_fun.toString()}\n${current_draw_fun.name}()`);
+
     string = string.replace('canvasCon.value.appendChild(canvas)', 'return canvas')
     console.log(string);
 }
