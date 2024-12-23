@@ -2,13 +2,14 @@
 <script lang="ts" setup>
 
 import { utils } from '@/utils';
-import { CanvasTexture, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
+import { CanvasTexture, DoubleSide, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import GUI from 'three/examples/jsm/libs/lil-gui.module.min.js';
 import { onMounted, ref } from 'vue';
 let canvasCon = ref()
 let canvas: HTMLCanvasElement
-function draw(slotColor: string) {
+let slotColor: string = "black"
+function draw() {
 
     // 绘制杜比音效标志
     let radio = 0.618
@@ -16,8 +17,9 @@ function draw(slotColor: string) {
     canvas.height = 512
     canvas.width = 300
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+    ctx.reset()
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.fillStyle = 'rgba(155,155,155,0)'
+    ctx.fillStyle = 'pink'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     // 上部分
@@ -31,7 +33,7 @@ function draw(slotColor: string) {
     ctx.arc(rectX + 40 + canvas.width * 0.05 / 2 + 5, h / 2 + 50, 80, -Math.PI / 2, Math.PI / 2)
     ctx.fill()
     // ctx.closePath()
-    ctx.restore()
+    // ctx.restore()
     ctx.beginPath()
     ctx.fillRect(canvas.width - (rectX + 60), rectY + 20, 40, 160)
 
@@ -51,7 +53,7 @@ function draw(slotColor: string) {
 
 }
 onMounted(() => {
-    draw("black")
+    draw()
     three_logic()
     create_gui()
 })
@@ -71,7 +73,14 @@ function three_logic() {
 
 
     canvas_texture = new CanvasTexture(canvas)
+    const plane = new PlaneGeometry(2.7, 5, 5)
+    plane.rotateX(-Math.PI / 2)
+    const material = new MeshBasicMaterial({ map: canvas_texture, side: DoubleSide, transparent: true })
+    canvas_texture.needsUpdate = true
+    const mesh = new Mesh(plane, material)
+    scene.add(mesh)
     renderer.render(scene, camera)
+
 }
 
 // Gui逻辑啊
@@ -91,19 +100,26 @@ function create_gui() {
     gui.domElement.style.right = '0px'
     gui.add(params, 'log').name('输出此图形绘制代码(console.log())')
     gui.add(params, 'style', style_list).onFinishChange(v => {
+
         console.log(v);
         if (v == '银色') {
-            draw('silver')
+            slotColor = 'silver'
+            draw()
         } else {
-            draw('black')
+            slotColor = 'black'
+            draw()
         }
+        canvas_texture.needsUpdate = true
+        renderer.render(scene, camera)
+
     })
 }
 
 function logCode() {
     let string = draw.toString()
-    string = string.replace(`canvas = document.createElement`, `let canvas = document.createElement`);
-    string = string.replace('canvasCon.value.appendChild(canvas)', 'return canvas')
+    string = string.replace(/canvas.*/, `let canvas = document.createElement('canvas')`);
+    string = string.replace(/slotColor/g, `'${slotColor}'`);
+    string = string.replace(/canvasCon.value.*/, 'return canvas')
     console.log(string);
 }
 </script>
