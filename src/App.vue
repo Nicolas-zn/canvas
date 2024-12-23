@@ -43,6 +43,9 @@ let application_list = [
   {
     component_name: 'traffic_yield', application_name: '交通-停车让行'
   },
+  {
+    component_name: 'traffic_limit_height', application_name: '交通-限高'
+  },
 ]
 
 function get_application_name(name: string) {
@@ -66,8 +69,8 @@ onMounted(() => {
   <div class="container">
     <el-container class="container">
       <el-aside>
-        <el-menu :default-active="'1'">
-          <el-menu-item v-for="(item, name) in components" :key="name" @click="changeComponent(item)">
+        <el-menu>
+          <el-menu-item v-for="(item, name) in components" :key="name" :index="name" @click=changeComponent(item)>
             <span> {{ get_application_name(name) }}</span>
           </el-menu-item>
         </el-menu>
