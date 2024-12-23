@@ -32,6 +32,9 @@ let application_list = [
   {
     component_name: 'cross', application_name: '十字架'
   },
+  {
+    component_name: 'dolby', application_name: '杜比音效'
+  },
 ]
 
 function get_application_name(name: string) {
@@ -55,7 +58,7 @@ onMounted(() => {
   <div class="container">
     <el-container class="container">
       <el-aside>
-        <el-menu :default-active="1">
+        <el-menu :default-active="'1'">
           <el-menu-item v-for="(item, name) in components" :key="name" @click="changeComponent(item)">
             <span> {{ get_application_name(name) }}</span>
           </el-menu-item>
