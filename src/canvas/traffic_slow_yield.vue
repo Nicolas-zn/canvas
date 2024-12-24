@@ -1,4 +1,4 @@
-_<!-- canvas  停车让行标志 -->
+_<!-- canvas 减速让行标识 -->
 <script lang="ts" setup>
 
 import { utils } from '@/utils';
@@ -10,59 +10,37 @@ let canvasCon = ref()
 let canvas: HTMLCanvasElement
 function draw() {
     canvas = document.createElement('canvas')
-    canvas.height = 400
-    canvas.width = 400
+    canvas.height = 500
+    canvas.width = 500
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
-    drawCrossInCircle(ctx)
+    drawSign(ctx)
     canvasCon.value.appendChild(canvas)
 }
 
 // drawCircle
-function drawCrossInCircle(ctx: CanvasRenderingContext2D) {
-    let centerX = canvas.width / 2, centerY = canvas.height / 2
-    let radius = canvas.width <= canvas.height ? canvas.width / 2 - ctx.lineWidth : canvas.height / 2 - ctx.lineWidth
-    let sides = 8
-    // 底部填充
-    let scale = 0.9
-    ctx.beginPath()
-    ctx.lineWidth = 1;        // 边框宽度
-    for (let i = 0; i < sides; i++) {
-        const angle = (Math.PI * 2 / sides) * i + Math.PI / sides; // 当前点的角度
-        const x = centerX + radius * Math.cos(angle); // 点的X坐标
-        const y = centerY + radius * Math.sin(angle); // 点的Y坐标
-        if (i == 0) {
-            ctx.moveTo(x, y); // 移动
+function drawSign(ctx: CanvasRenderingContext2D) {
+    ctx.lineWidth = 50
+    let circleRadius = canvas.width <= canvas.height ? canvas.width / 2 - ctx.lineWidth : canvas.height / 2 - ctx.lineWidth
+    ctx.translate(canvas.width / 2, canvas.height / 2 - 30)
+    // 角度
+    const angle = [-Math.PI / 6, -Math.PI / 6 * 5, Math.PI * 0.5]
+    angle.forEach((angle, index) => {
+        if (index == 0) {
+            ctx.moveTo(circleRadius * Math.cos(angle), circleRadius * Math.sin(angle))
         } else {
-            ctx.lineTo(x, y); // 绘制到下一个点
+            ctx.lineTo(circleRadius * Math.cos(angle), circleRadius * Math.sin(angle))
         }
-
-    }
-    ctx.fillStyle = 'red'; // 填充颜色
-    ctx.fill();
+    });
     ctx.closePath()
-    ctx.beginPath()
-
-    for (let i = 0; i < sides; i++) {
-        const angle = (Math.PI * 2 / sides) * i + Math.PI / sides; // 当前点的角度
-        const x = centerX + radius * scale * Math.cos(angle); // 点的X坐标
-        const y = centerY + radius * scale * Math.sin(angle); // 点的Y坐标
-        if (i == 0) {
-            ctx.moveTo(x, y); // 移动
-        } else {
-            ctx.lineTo(x, y); // 绘制到下一个点
-        }
-
-    }
-    ctx.closePath()
-    ctx.strokeStyle = 'white'; // 边框颜色
-    ctx.lineWidth = 15;        // 边框宽度
-    ctx.stroke();             // 绘制边框
-    ctx.textBaseline = 'middle'
-    ctx.font = `bold ${canvas.height / 2}px Arial`;
-    ctx.textAlign = 'center'
+    ctx.strokeStyle = 'red'
+    ctx.stroke()
     ctx.fillStyle = 'white'
-    ctx.fillText('停', centerX, centerY + ctx.lineWidth / 2)
+    ctx.fill()
+    ctx.textAlign = 'center'
 
+    ctx.font = `bold ${canvas.width * 0.3}px Arial`;
+    ctx.fillStyle = 'black'
+    ctx.fillText('让', 0, 50)
 }
 onMounted(() => {
     draw()
@@ -82,6 +60,8 @@ function three_logic() {
     controls.addEventListener('change', () => {
         renderer.render(scene, camera)
     })
+
+
     canvas_texture = new CanvasTexture(canvas)
     const plane = new PlaneGeometry(5, 5)
     plane.rotateX(-Math.PI / 2)
@@ -111,7 +91,7 @@ function create_gui() {
 function logCode() {
     let string = draw.toString()
     string = string.replace(`canvas = document.createElement`, `let canvas = document.createElement`);
-    string = string.replace(`drawCrossInCircle(ctx)`, `${drawCrossInCircle.toString()} ${drawCrossInCircle.name}()`);
+    string = string.replace(`drawSign(ctx)`, `${drawSign.toString()} ${drawSign.name}()`);
     string = string.replace('canvasCon.value.appendChild(canvas)', 'return canvas')
     console.log(string);
 }
