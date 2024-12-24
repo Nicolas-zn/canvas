@@ -35,7 +35,7 @@ let application_list = [
     component_name: 'dolby', application_name: '杜比音效'
   },
   {
-    component_name: 'traffic_limit_speed', application_name: '交通-限速标识'
+    component_name: 'traffic_limit_speed', application_name: '交通-限速'
   },
   {
     component_name: 'traffic_forbid_driveIn', application_name: '交通-禁止驶入'
@@ -48,6 +48,9 @@ let application_list = [
   },
   {
     component_name: 'traffic_limit_height', application_name: '交通-限高'
+  },
+  {
+    component_name: 'traffic_limit_width', application_name: '交通-限宽'
   },
   {
     component_name: 'traffic_forbid_park', application_name: '交通-禁止停车'
