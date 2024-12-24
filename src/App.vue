@@ -58,6 +58,9 @@ let application_list = [
   {
     component_name: 'traffic_slow_drive', application_name: '交通-慢行'
   },
+  {
+    component_name: 'traffic_highway', application_name: '交通-高速标识'
+  },
 ]
 
 function get_application_name(name: string) {
