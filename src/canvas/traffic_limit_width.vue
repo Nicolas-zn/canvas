@@ -1,4 +1,4 @@
-_<!-- canvas 限高标识 -->
+_<!-- canvas 限宽标识 -->
 <script lang="ts" setup>
 
 import { utils } from '@/utils';
@@ -32,22 +32,22 @@ function drawSign(ctx: CanvasRenderingContext2D) {
     ctx.closePath();
 
     // 上下三角
-    // 上三角
+    // 左三角
     let centerY = canvas.height / 2, centerX = canvas.width / 2;
     let yRatio = 0.55; // 调整半径比例
     let arcRadius = circleRadius * yRatio; // 使用相对比例
     ctx.beginPath();
-    ctx.moveTo(centerX, centerY * yRatio); // 确保从正确的起点开始
-    ctx.arc(centerX, centerY * yRatio, arcRadius, Math.PI * 1.2, Math.PI * 1.8);
+    ctx.moveTo(centerX * yRatio, centerY); // 确保从正确的起点开始
+    ctx.arc(centerX * yRatio, centerY, arcRadius, Math.PI * 0.7, Math.PI * 1.3);
     ctx.closePath();
     ctx.fillStyle = "black";
     ctx.fill();
-    // 下三角
+    // 右三角
     ctx.beginPath();
     let yRatio_2 = 1.45; // 调整半径比例
 
-    ctx.moveTo(centerX, centerY * yRatio_2); // 确保从正确的起点开始
-    ctx.arc(centerX, centerY * yRatio_2, arcRadius, Math.PI * 0.2, Math.PI * 0.8);
+    ctx.moveTo(centerX * yRatio_2, centerY); // 确保从正确的起点开始
+    ctx.arc(centerX * yRatio_2, centerY, arcRadius, -Math.PI * 0.3, Math.PI * 0.3);
     ctx.closePath();
     ctx.fillStyle = "black";
     ctx.fill();
@@ -64,9 +64,9 @@ function drawSign(ctx: CanvasRenderingContext2D) {
     ctx.fillStyle = "black";
     ctx.font = `bold ${canvas.height / 2}px Arial`;
     ctx.textAlign = "center";
-    ctx.fillText("3", (canvas.width / part) * 1.4, canvas.height / 2 + (ctx.lineWidth / 2 - 10));
+    ctx.fillText("3", (canvas.width / part) * 1.8, canvas.height / 2 + (ctx.lineWidth / 2 - 10));
     ctx.font = `bold ${canvas.height / 2 * 0.5}px Arial`;
-    ctx.fillText(".5m", (canvas.width / part) * 3.1, canvas.height / 2 + (ctx.lineWidth / 2) + 10);
+    ctx.fillText("m", (canvas.width / part) * 3.1, canvas.height / 2 + (ctx.lineWidth / 2) + 10);
 }
 
 onMounted(() => {
