@@ -44,7 +44,13 @@ let application_list = [
     component_name: 'traffic_yield', application_name: '交通-停车让行'
   },
   {
+    component_name: 'traffic_slow_yield', application_name: '交通-减速让行'
+  },
+  {
     component_name: 'traffic_limit_height', application_name: '交通-限高'
+  },
+  {
+    component_name: 'traffic_forbid_park', application_name: '交通-禁止停车'
   },
 ]
 
