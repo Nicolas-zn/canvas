@@ -31,9 +31,9 @@ function drawSign(ctx: CanvasRenderingContext2D) {
     ctx.font = `bold ${canvas.height * 0.1}px Arial`
     ctx.textAlign = "center";
 
-    let text = '国家高速', offset = 60
+    let text = '国家高速', offset = canvas.width * 0.17
     for (let index = 0; index < text.length; index++) {
-        ctx.fillText(text[index], 100 + offset * index, canvas.height * 0.08)
+        ctx.fillText(text[index], canvas.width * 0.25 + offset * index, canvas.height * 0.08)
     }
     ctx.font = `bold ${canvas.height * 0.6}px Arial`
 
