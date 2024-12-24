@@ -64,6 +64,9 @@ let application_list = [
   {
     component_name: 'traffic_forbid_access', application_name: '交通-禁止通行'
   },
+  {
+    component_name: 'traffic_forbid_straight', application_name: '交通-禁止直行'
+  },
 ]
 
 function get_application_name(name: string) {
