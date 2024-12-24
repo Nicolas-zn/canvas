@@ -62,6 +62,7 @@ function three_logic() {
     camera.lookAt(0, 0, 0)
 
     canvas_texture = new CanvasTexture(canvas)
+    canvas_texture.colorSpace = SRGBColorSpace
     canvas_texture.colorSpace = SRGBColorSpace;
     canvas_texture.wrapS = RepeatWrapping
     canvas_texture.wrapT = RepeatWrapping

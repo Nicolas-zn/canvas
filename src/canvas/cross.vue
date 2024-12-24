@@ -115,6 +115,7 @@ function three_logic() {
         renderer.render(scene, camera)
     })
     canvas_texture = new CanvasTexture(canvas)
+    canvas_texture.colorSpace = SRGBColorSpace
     const plane = new PlaneGeometry(10, 10)
     plane.rotateX(-Math.PI / 2)
     const material = new MeshBasicMaterial({ map: canvas_texture, side: 2, transparent: true })

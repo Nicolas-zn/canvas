@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 
 import { utils } from '@/utils';
-import { CanvasTexture, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
+import { CanvasTexture, PerspectiveCamera, Scene, SRGBColorSpace, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import GUI from 'three/examples/jsm/libs/lil-gui.module.min.js';
 import { onMounted, ref } from 'vue';
@@ -38,6 +38,7 @@ function three_logic() {
 
 
   canvas_texture = new CanvasTexture(canvas)
+  canvas_texture.colorSpace = SRGBColorSpace
   renderer.render(scene, camera)
 }
 

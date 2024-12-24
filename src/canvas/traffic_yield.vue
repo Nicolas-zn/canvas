@@ -2,7 +2,7 @@ _<!-- canvas  停车让行标志 -->
 <script lang="ts" setup>
 
 import { utils } from '@/utils';
-import { CanvasTexture, DoubleSide, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, Scene, WebGLRenderer } from 'three';
+import { CanvasTexture, DoubleSide, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import GUI from 'three/examples/jsm/libs/lil-gui.module.min.js';
 import { onMounted, ref } from 'vue';
@@ -83,6 +83,7 @@ function three_logic() {
         renderer.render(scene, camera)
     })
     canvas_texture = new CanvasTexture(canvas)
+    canvas_texture.colorSpace = SRGBColorSpace
     const plane = new PlaneGeometry(5, 5)
     plane.rotateX(-Math.PI / 2)
     const material = new MeshBasicMaterial({ map: canvas_texture, side: DoubleSide, transparent: true })
