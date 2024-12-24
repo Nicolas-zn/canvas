@@ -61,6 +61,9 @@ let application_list = [
   {
     component_name: 'traffic_highway', application_name: '交通-高速标识'
   },
+  {
+    component_name: 'traffic_forbid_access', application_name: '交通-禁止通行'
+  },
 ]
 
 function get_application_name(name: string) {
