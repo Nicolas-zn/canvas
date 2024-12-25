@@ -85,6 +85,9 @@ let application_list = [
   {
     component_name: 'security_camera', application_name: '监控摄像头'
   },
+  {
+    component_name: 'car_logo_benz', application_name: '车标-奔驰'
+  },
 ]
 
 function get_application_name(name: string) {
