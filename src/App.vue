@@ -79,6 +79,9 @@ let application_list = [
   {
     component_name: 'license_plate', application_name: '立体车牌号'
   },
+  {
+    component_name: 'boc_log', application_name: '中国银行'
+  },
 ]
 
 function get_application_name(name: string) {
