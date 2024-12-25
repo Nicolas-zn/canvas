@@ -1,9 +1,5 @@
 <script setup lang="ts">
 import { markRaw, onMounted, ref } from 'vue';
-
-
-
-
 const file = import.meta.glob("@/canvas/*.vue", { eager: true });
 let init: Record<string, any> = {}
 const components: Record<string, any> = Object.keys(file).reduce((oldValue, newValue) => {
