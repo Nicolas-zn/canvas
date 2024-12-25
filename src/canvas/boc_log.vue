@@ -86,6 +86,14 @@ function three_logic() {
 let params = {
     log: () => {
         logCode()
+    },
+    print: () => {
+        const imageDataUrl = canvas.toDataURL()
+        const link = document.createElement('a');
+        link.href = imageDataUrl;
+        link.download = 'high-quality-image.png';
+        link.click();
+        link.remove()
     }
 }
 function create_gui() {
@@ -95,6 +103,7 @@ function create_gui() {
     gui.domElement.style.position = 'relative'
     gui.domElement.style.top = '0px'
     gui.domElement.style.right = '0px'
+    gui.add(params, 'print').name('保存')
     gui.add(params, 'log').name('输出此图形绘制代码(console.log())')
 }
 
