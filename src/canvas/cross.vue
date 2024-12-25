@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 
 import { utils } from '@/utils';
-import { CanvasTexture, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, Scene, WebGLRenderer } from 'three';
+import { CanvasTexture, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import { onMounted, ref } from 'vue';
 import GUI from 'three/examples/jsm/libs/lil-gui.module.min.js';

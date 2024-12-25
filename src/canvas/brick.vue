@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 
 import { utils } from '@/utils';
-import { BoxGeometry, CanvasTexture, Mesh, MeshBasicMaterial, PerspectiveCamera, RepeatWrapping, Scene, WebGLRenderer } from 'three';
+import { BoxGeometry, CanvasTexture, Mesh, MeshBasicMaterial, PerspectiveCamera, RepeatWrapping, Scene, SRGBColorSpace, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import { onMounted, ref } from 'vue';
 let canvasCon = ref()

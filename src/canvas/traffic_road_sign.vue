@@ -34,7 +34,6 @@ function drawSign(ctx: CanvasRenderingContext2D) {
     ctx.stroke()
     let startX = 20
     let offset = (canvas.width - (startX * 2 + 10)) / parts
-    console.log(offset);
 
     ctx.fillStyle = "white"
     ctx.lineWidth = 3
@@ -71,7 +70,6 @@ function drawSign(ctx: CanvasRenderingContext2D) {
     // 绘制箭头
     function draw_arrow_content(left_corner_x: number) {
         const temp_center = [left_corner_x + offset / 2, canvas.height / 2]
-        console.log(temp_center);
 
         ctx.translate(temp_center[0], temp_center[1])
         let rectX = 15, rectY = 50
@@ -123,7 +121,6 @@ function drawSign(ctx: CanvasRenderingContext2D) {
         // ctx.setLineDash([]);
         const temp_center = [left_corner_x + offset / 2, canvas.height / 2]
         ctx.translate(temp_center[0], temp_center[1])
-        console.log(temp_center);
         if (rotate) {
             ctx.scale(-1, 1)
         }
