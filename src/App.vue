@@ -14,8 +14,9 @@ const components: Record<string, any> = Object.keys(file).reduce((oldValue, newV
 }, init);
 
 let current_component = ref()
-const changeComponent = (component: any) => {
+const changeComponent = (component: any, name = '停车位') => {
   current_component.value = component
+  window.current_pic_name = get_application_name(name)
 }
 
 let application_list = [
@@ -109,7 +110,8 @@ onMounted(() => {
     <el-container class="container">
       <el-aside>
         <el-menu>
-          <el-menu-item v-for="(item, name) in components" :key="name" :index="name" @click=changeComponent(item)>
+          <el-menu-item v-for="(item, name) in components" :key="name" :index="name"
+            @click="changeComponent(item, name)">
             <span> {{ get_application_name(name) }}</span>
           </el-menu-item>
         </el-menu>

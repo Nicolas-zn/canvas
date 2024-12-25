@@ -109,7 +109,7 @@ let params = {
         const imageDataUrl = canvas.toDataURL()
         const link = document.createElement('a');
         link.href = imageDataUrl;
-        link.download = 'high-quality-image.png';
+        link.download = `${window.current_pic_name}.png`;
         link.click();
         link.remove()
     }
