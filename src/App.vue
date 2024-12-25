@@ -88,6 +88,9 @@ let application_list = [
   {
     component_name: 'car_logo_benz', application_name: '车标-奔驰'
   },
+  {
+    component_name: 'car_logo_audi', application_name: '车标-奥迪'
+  },
 ]
 
 function get_application_name(name: string) {
