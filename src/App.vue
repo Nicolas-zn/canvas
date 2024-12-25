@@ -82,6 +82,9 @@ let application_list = [
   {
     component_name: 'boc_log', application_name: '中国银行'
   },
+  {
+    component_name: 'tai_chi', application_name: '太极'
+  },
 ]
 
 function get_application_name(name: string) {
