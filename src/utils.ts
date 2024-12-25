@@ -9,7 +9,7 @@ export const utils = {
         let init_scene = () => {
             scene = new Scene();
             scene.background = new Color("#3f3f3f")
-            camera = new PerspectiveCamera(60, domElement.clientWidth / domElement.clientHeight, 1, 1000);
+            camera = new PerspectiveCamera(60, domElement.clientWidth / domElement.clientHeight, 0.1, 1000);
             camera.position.set(0, 5, 20);
             renderer = new WebGLRenderer({ antialias: true });
             renderer.setSize(domElement.clientWidth, domElement.clientHeight);
