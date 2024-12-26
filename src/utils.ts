@@ -83,6 +83,36 @@ export const utils = {
             }
         }
         event()
+        // 鼠标移动事件
+        const tooltip = document.createElement('div');
+        tooltip.style.position = 'absolute'
+        tooltip.style.display = 'none'
+        tooltip.style.background = 'white'
+        tooltip.style.padding = '5px'
+        tooltip.style.color = 'black'
+        document.body.appendChild(tooltip)
+        new_canvas.addEventListener('mousemove', (event) => {
+            console.log(event);
+
+            const rect = new_canvas.getBoundingClientRect();
+            const mouseX = event.clientX - rect.left;
+            const mouseY = event.clientY - rect.top;
+
+            // 转换为坐标系中的坐标
+            const coordX = Math.round(mouseX - new_canvas.width / 2);
+            const coordY = Math.round(new_canvas.height / 2 - mouseY);
+
+            // 显示提示框
+            tooltip.style.left = `${event.clientX + 10}px`;
+            tooltip.style.top = `${event.clientY + 10}px`;
+            tooltip.style.display = 'block';
+            tooltip.textContent = `X: ${coordX}, Y: ${coordY}`;
+        });
+
+        // 鼠标离开时隐藏提示框
+        new_canvas.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+        });
         return new_canvas
     },
     drawGrid(new_canvas: HTMLCanvasElement) {
