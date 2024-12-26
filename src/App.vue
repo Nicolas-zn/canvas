@@ -96,8 +96,12 @@ let application_list = [
   },
   {
     component_name: 'car_logo_toyota', application_name: '车标-丰田'
-  }, {
+  },
+  {
     component_name: 'car_logo_vw', application_name: '车标-大众'
+  },
+  {
+    component_name: 'car_logo_nissan', application_name: '车标-日产'
   },
 ]
 
