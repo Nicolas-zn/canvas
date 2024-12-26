@@ -49,6 +49,7 @@ let params = {
     logCode()
   }
 }
+let di: any
 function create_gui() {
   const gui = new GUI()
   canvasCon.value.appendChild(gui.domElement)

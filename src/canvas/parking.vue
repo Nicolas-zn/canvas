@@ -103,7 +103,7 @@ let params = {
         utils.drawGrid(new_canvas)
     }
 }
-let di: FunctionController<{ style: string; append_new_canvas: () => void; load_canvas: () => void; }, "load_canvas">
+let di: any
 function create_gui() {
     let gui = new GUI()
     canvasCon.value.appendChild(gui.domElement)

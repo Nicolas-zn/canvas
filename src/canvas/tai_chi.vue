@@ -116,6 +116,19 @@ let params = {
         link.click();
         link.remove()
     },
+    append_new_canvas: () => {
+        new_canvas = utils.drawAxes(canvas)
+        canvasCon.value.appendChild(new_canvas)
+        di.enable()
+    },
+    load_canvas: () => {
+        const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const new_ctx = new_canvas.getContext('2d') as CanvasRenderingContext2D
+        new_ctx.clearRect(0, 0, new_canvas.width, new_canvas.height)
+        new_ctx.putImageData(imageData, 0, 0);
+        utils.drawGrid(new_canvas)
+    },
     svg: () => {
         // const canvas = document.getElementById('yourCanvasId');
         const imageDataUrl = canvas.toDataURL();
@@ -138,6 +151,7 @@ let params = {
         URL.revokeObjectURL(url);
     }
 }
+let di: any
 function create_gui() {
     const gui = new GUI()
     canvasCon.value.appendChild(gui.domElement)
