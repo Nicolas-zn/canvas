@@ -90,6 +90,7 @@ function three_logic() {
 }
 
 // Gui逻辑啊
+let new_canvas: HTMLCanvasElement
 let params = {
     log: () => {
         logCode()

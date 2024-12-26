@@ -125,6 +125,7 @@ function three_logic() {
 }
 // Gui逻辑啊
 let style_list = ['方形', '圆形']
+let new_canvas: HTMLCanvasElement
 let params = {
     style: '圆形',
     log: () => {
