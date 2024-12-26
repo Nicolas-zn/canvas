@@ -17,7 +17,7 @@ function draw() {
     canvasCon.value.appendChild(canvas)
 }
 
-// drawCircle
+
 function drawCrossInCircle(ctx: CanvasRenderingContext2D) {
     // ctx.fillStyle = 'rgb(255, 255, 255,1)'; // 完全透明
     // ctx.fillRect(0, 0, canvas.width, canvas.height)

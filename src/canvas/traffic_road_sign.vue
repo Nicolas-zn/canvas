@@ -17,7 +17,7 @@ function draw() {
     canvasCon.value.appendChild(canvas)
 }
 
-// drawCircle
+
 function drawSign(ctx: CanvasRenderingContext2D) {
     ctx.lineWidth = 5
 

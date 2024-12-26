@@ -17,7 +17,7 @@ function draw() {
     canvasCon.value.appendChild(canvas)
 }
 
-// drawCircle
+
 function drawSign(ctx: CanvasRenderingContext2D) {
     ctx.fillStyle = 'white'
     // ctx.fillRect(0, 0, canvas.width, canvas.height)

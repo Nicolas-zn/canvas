@@ -17,7 +17,7 @@ function draw() {
     canvasCon.value.appendChild(canvas)
 }
 
-// drawCircle
+
 function drawSign(ctx: CanvasRenderingContext2D) {
     ctx.lineWidth = 20;
     let circleRadius = canvas.width / 2 - ctx.lineWidth

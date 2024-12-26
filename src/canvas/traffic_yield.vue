@@ -17,7 +17,7 @@ function draw() {
     canvasCon.value.appendChild(canvas)
 }
 
-// drawCircle
+
 function drawCrossInCircle(ctx: CanvasRenderingContext2D) {
     let centerX = canvas.width / 2, centerY = canvas.height / 2
     let radius = canvas.width <= canvas.height ? canvas.width / 2 - ctx.lineWidth : canvas.height / 2 - ctx.lineWidth
