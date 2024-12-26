@@ -148,6 +148,10 @@ function create_gui() {
     gui.domElement.style.position = 'relative'
     gui.domElement.style.top = '0px'
     gui.domElement.style.right = '0px'
+
+    gui.add(params, 'append_new_canvas').name('打开调试页面')
+    di = gui.add(params, 'load_canvas').name('载入内容').disable()
+    // <create_gui_slot>
     gui.add(params, 'print').name('保存')
     gui.add(params, 'log').name('输出此图形绘制代码(console.log())')
 }

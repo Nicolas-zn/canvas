@@ -4,7 +4,7 @@
 import { utils } from '@/utils';
 import { CanvasTexture, DoubleSide, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
-import GUI, { FunctionController } from 'three/examples/jsm/libs/lil-gui.module.min.js';
+import GUI from 'three/examples/jsm/libs/lil-gui.module.min.js';
 import { onMounted, ref } from 'vue';
 let canvasCon = ref()
 let canvas: HTMLCanvasElement
@@ -111,6 +111,7 @@ function create_gui() {
     gui.domElement.style.position = 'relative'
     gui.domElement.style.top = '0px'
     gui.domElement.style.right = '0px'
+    // <create_gui_slot>
     gui.add(params, 'style', [...style_list]).onChange((st) => {
         change_canvas(st)
     })
