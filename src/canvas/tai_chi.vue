@@ -56,6 +56,13 @@ function drawSign(ctx: CanvasRenderingContext2D) {
 
 }
 
+
+// 输出为svg
+// import { Canvg } from 'canvg';
+// function export_svg() {
+//     const ctx = canvas.getContext('2d')
+
+// }
 onMounted(() => {
     draw()
     three_logic()
@@ -107,6 +114,27 @@ let params = {
         link.download = `${window.current_pic_name}.png`;
         link.click();
         link.remove()
+    },
+    svg: () => {
+        // const canvas = document.getElementById('yourCanvasId');
+        const imageDataUrl = canvas.toDataURL();
+
+        // 构建包含图像的 SVG
+        const svgContent = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}">
+            <image href="${imageDataUrl}" width="${canvas.width}" height="${canvas.height}" />
+        </svg>
+    `;
+
+        // 下载 SVG 文件
+        const blob = new Blob([svgContent], { type: "image/svg+xml;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${window.current_pic_name}.svg`;
+        link.click();
+        URL.revokeObjectURL(url);
     }
 }
 function create_gui() {
@@ -117,6 +145,7 @@ function create_gui() {
     gui.domElement.style.top = '0px'
     gui.domElement.style.right = '0px'
     gui.add(params, 'print').name('保存')
+    gui.add(params, 'svg').name('导出svg')
     gui.add(params, 'log').name('输出此图形绘制代码(console.log())')
 }
 
