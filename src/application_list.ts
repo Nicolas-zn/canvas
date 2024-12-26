@@ -87,6 +87,9 @@ let application_list = [
     {
         component_name: 'car_logo_nissan', application_name: '车标-日产'
     },
+    {
+        component_name: 'car_logo_mitsubishi', application_name: '车标-三菱'
+    },
 ]
 
 export default application_list
