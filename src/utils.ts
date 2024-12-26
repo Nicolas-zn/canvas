@@ -49,5 +49,56 @@ export const utils = {
         pmremGenerator.compileEquirectangularShader();
         let environment = pmremGenerator.fromScene(new RoomEnvironment()).texture;
         scene.environment = environment
+    },
+    drawAxes(canvas: HTMLCanvasElement) {
+        const new_canvas = document.createElement('canvas')
+        new_canvas.width = canvas.width
+        new_canvas.height = canvas.height
+        const ctx = new_canvas.getContext('2d') as CanvasRenderingContext2D
+        ctx.clearRect(0, 0, new_canvas.width, new_canvas.height);
+        ctx.fillStyle = 'white'
+        ctx.fillRect(0, 0, new_canvas.width, new_canvas.height)
+
+        ctx.lineWidth = 1
+        for (let x = 0; x < new_canvas.width; x += 5) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0)
+            ctx.lineTo(x, canvas.height)
+            ctx.stroke()
+        }
+        for (let y = 0; y < new_canvas.height; y += 5) {
+            ctx.beginPath();
+            ctx.moveTo(0, y)
+            ctx.lineTo(canvas.width, y)
+            ctx.stroke()
+        }
+        function event() {
+            if (new_canvas.height * 2 > window.innerHeight) {
+                new_canvas.style.position = 'absolute'
+                new_canvas.style.top = '0px'
+                console.log(0.1 * window.innerWidth);
+                console.log();
+
+                new_canvas.style.left = `${canvas.width + 0.05 * window.innerWidth}px`
+            }
+        }
+        event()
+        return new_canvas
+    },
+    drawGrid(new_canvas: HTMLCanvasElement) {
+        const ctx = new_canvas.getContext('2d') as CanvasRenderingContext2D
+        for (let x = 0; x < new_canvas.width; x += 5) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0)
+            ctx.lineTo(x, new_canvas.height)
+            ctx.stroke()
+        }
+        for (let y = 0; y < new_canvas.height; y += 5) {
+            ctx.beginPath();
+            ctx.moveTo(0, y)
+            ctx.lineTo(new_canvas.width, y)
+            ctx.stroke()
+        }
+
     }
 }

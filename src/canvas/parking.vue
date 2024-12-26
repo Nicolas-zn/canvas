@@ -4,7 +4,7 @@
 import { utils } from '@/utils';
 import { CanvasTexture, DoubleSide, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
-import GUI from 'three/examples/jsm/libs/lil-gui.module.min.js';
+import GUI, { FunctionController } from 'three/examples/jsm/libs/lil-gui.module.min.js';
 import { onMounted, ref } from 'vue';
 let canvasCon = ref()
 let canvas: HTMLCanvasElement
@@ -26,10 +26,37 @@ function draw() {
     canvasCon.value.appendChild(canvas)
 
 }
+
+// 
+// function drawAxes(canvas: HTMLCanvasElement) {
+//     const new_canvas = document.createElement('canvas')
+//     new_canvas.width = canvas.width
+//     new_canvas.height = canvas.height
+//     const ctx = new_canvas.getContext('2d') as CanvasRenderingContext2D
+//     ctx.clearRect(0, 0, new_canvas.width, new_canvas.height);
+//     ctx.fillStyle = 'white'
+//     ctx.fillRect(0, 0, new_canvas.width, new_canvas.height)
+
+//     ctx.lineWidth = 1
+//     for (let x = 0; x < new_canvas.width; x += 5) {
+//         ctx.beginPath();
+//         ctx.moveTo(x, 0)
+//         ctx.lineTo(x, canvas.height)
+//         ctx.stroke()
+//     }
+//     for (let y = 0; y < new_canvas.height; y += 5) {
+//         ctx.beginPath();
+//         ctx.moveTo(0, y)
+//         ctx.lineTo(canvas.width, y)
+//         ctx.stroke()
+//     }
+//     return new_canvas
+// }
 onMounted(() => {
     draw()
     three_logic()
     create_gui()
+
 })
 
 // 3d逻辑
@@ -59,11 +86,26 @@ function three_logic() {
 }
 
 let style_list = ['样式1', '样式2']
+let new_canvas: HTMLCanvasElement
 let params = {
     style: '样式1',
+    append_new_canvas: () => {
+        new_canvas = utils.drawAxes(canvas)
+        canvasCon.value.appendChild(new_canvas)
+        di.enable()
+    },
+    load_canvas: () => {
+        const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const new_ctx = new_canvas.getContext('2d') as CanvasRenderingContext2D
+        new_ctx.clearRect(0, 0, new_canvas.width, new_canvas.height)
+        new_ctx.putImageData(imageData, 0, 0);
+        utils.drawGrid(new_canvas)
+    }
 }
+let di: FunctionController<{ style: string; append_new_canvas: () => void; load_canvas: () => void; }, "load_canvas">
 function create_gui() {
-    const gui = new GUI()
+    let gui = new GUI()
     canvasCon.value.appendChild(gui.domElement)
     gui.title('样式')
     gui.domElement.style.position = 'relative'
@@ -72,6 +114,8 @@ function create_gui() {
     gui.add(params, 'style', [...style_list]).onChange((st) => {
         change_canvas(st)
     })
+    gui.add(params, 'append_new_canvas').name('打开调试页面')
+    di = gui.add(params, 'load_canvas').name('载入内容').disable()
 }
 
 // 样式更改
