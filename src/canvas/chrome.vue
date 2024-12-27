@@ -26,30 +26,29 @@ function drawSign(ctx: CanvasRenderingContext2D) {
 
     // 填充圆的内部
 
-    let innerRadius = circleRadius * 0.5
+    let innerRadius = circleRadius * 0.45
 
     ctx.fillStyle = 'pink'
     ctx.translate(canvas.width / 2, canvas.height / 2)
-    let color = ['red', 'blue', 'yellow']
+    let color = ['#FBBC04', '#34A853', '#EA4335']
     for (let i = 0; i < 3; i++) {
-
-
+        ctx.save()
+        ctx.arc(0, 0, circleRadius, 0, Math.PI * 2)
+        ctx.arc(0, 0, innerRadius, 0, Math.PI * 2, true)
+        ctx.closePath()
+        ctx.beginPath()
+        ctx.rotate(Math.PI * 2 / 3 * i)
+        ctx.arc(0, 0, circleRadius, -Math.PI / 6, Math.PI / 2)
+        ctx.lineTo(innerRadius * Math.cos(Math.PI / 6), innerRadius * Math.sin(Math.PI / 6))
+        ctx.fillRect(innerRadius * Math.cos(Math.PI / 6), innerRadius * Math.sin(Math.PI / 6), 15, 15)
+        ctx.arc(0, 0, innerRadius, Math.PI / 6, Math.PI / 6 - Math.PI / 3 * 2, true)
+        ctx.closePath()
+        ctx.fillStyle = color[i]
+        ctx.fill()
+        ctx.restore()
+        ctx.save()
     }
-    ctx.save()
-    ctx.arc(0, 0, circleRadius, 0, Math.PI * 2)
-    ctx.arc(0, 0, innerRadius, 0, Math.PI * 2, true)
-    ctx.closePath()
-    ctx.fill()
-    ctx.beginPath()
-    ctx.rotate(Math.PI * 2 / 3 * 1)
-    ctx.arc(0, 0, circleRadius, 0, Math.PI / 6 + Math.PI / 2)
-    ctx.lineTo(innerRadius * Math.cos(Math.PI / 6), innerRadius * Math.sin(Math.PI / 6))
-    ctx.arc(0, 0, innerRadius, Math.PI / 6, Math.PI / 6 - Math.PI / 3 * 2, true)
-    ctx.closePath()
-    ctx.fillStyle = color[1]
-    ctx.fill()
-    ctx.restore()
-    ctx.save()
+
 
 
 
@@ -57,6 +56,12 @@ function drawSign(ctx: CanvasRenderingContext2D) {
     ctx.arc(0, 0, innerRadius, 0, Math.PI * 2, true)
     ctx.fillStyle = 'white'
     ctx.fill()
+    ctx.beginPath()
+
+    ctx.fillStyle = '#4285F4'
+    ctx.arc(0, 0, circleRadius * 0.33, 0, Math.PI * 2, true)
+    ctx.fill()
+
 }
 
 onMounted(() => {

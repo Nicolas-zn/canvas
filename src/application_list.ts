@@ -129,6 +129,9 @@ let application_list = [
     {
         component_name: 'energy_south_power_grid', application_name: '能源-南方电网'
     },
+    {
+        component_name: 'chrome', application_name: 'chrome浏览器'
+    },
 ]
 
 export default application_list
