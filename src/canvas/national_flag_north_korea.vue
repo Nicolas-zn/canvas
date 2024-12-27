@@ -21,7 +21,7 @@ function draw() {
 
 function drawSign(ctx: CanvasRenderingContext2D) {
 
-    const H = 300; // 国旗高度
+    const H = canvas.height; // 国旗高度
     const W = 2 * H; // 国旗宽度
 
     const blueHeight = H / 6; // 蓝色条带高度
