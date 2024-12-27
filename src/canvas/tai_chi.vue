@@ -68,6 +68,11 @@ onMounted(() => {
     three_logic()
     create_gui()
 })
+
+
+onBeforeUnmount(() => {
+    renderer.dispose()
+})
 onBeforeUnmount(() => {
     renderer.setAnimationLoop(null)
 })

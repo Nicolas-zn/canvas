@@ -4,7 +4,7 @@
 import { utils } from '@/utils';
 import { BoxGeometry, CanvasTexture, Mesh, MeshBasicMaterial, PerspectiveCamera, RepeatWrapping, Scene, SRGBColorSpace, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
-import { onMounted, ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 let canvasCon = ref()
 let canvas: HTMLCanvasElement
 function draw() {

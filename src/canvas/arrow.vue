@@ -3,7 +3,7 @@
 
 import { utils } from '@/utils';
 import { CanvasTexture, Clock, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, RepeatWrapping, Scene, SRGBColorSpace, WebGLRenderer } from 'three';
-import { onMounted, ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 let canvasCon = ref()
 let canvas: HTMLCanvasElement
 function draw() {
@@ -50,7 +50,9 @@ onMounted(() => {
     draw()
     three_logic()
 })
-
+onBeforeUnmount(() => {
+    renderer.dispose()
+})
 // 3d逻辑
 let threeCon = ref()
 let canvas_texture: CanvasTexture

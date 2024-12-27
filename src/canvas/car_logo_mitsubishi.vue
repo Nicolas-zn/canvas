@@ -5,7 +5,7 @@ import { utils } from '@/utils';
 import { CanvasTexture, DoubleSide, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import GUI from 'three/examples/jsm/libs/lil-gui.module.min.js';
-import { onMounted, ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 let canvasCon = ref()
 let canvas: HTMLCanvasElement
 function draw() {
@@ -85,6 +85,11 @@ onMounted(() => {
     draw()
     three_logic()
     create_gui()
+})
+
+
+onBeforeUnmount(() => {
+    renderer.dispose()
 })
 
 // 3d逻辑
