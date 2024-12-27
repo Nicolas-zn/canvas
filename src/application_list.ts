@@ -126,6 +126,9 @@ let application_list = [
     {
         component_name: 'energy_cnpc', application_name: '能源-中国石油'
     },
+    {
+        component_name: 'energy_south_power_grid', application_name: '能源-南方电网'
+    },
 ]
 
 export default application_list
