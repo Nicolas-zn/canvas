@@ -12,6 +12,8 @@ function draw() {
     canvas = document.createElement('canvas')
     canvas.height = 300
     canvas.width = canvas.height * 1.5
+    canvas.style.border = 'solid 1px black'
+
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
     drawSign(ctx)
     canvasCon.value.appendChild(canvas)
