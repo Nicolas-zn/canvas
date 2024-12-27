@@ -40,7 +40,6 @@ function drawSign(ctx: CanvasRenderingContext2D) {
         ctx.rotate(Math.PI * 2 / 3 * i)
         ctx.arc(0, 0, circleRadius, -Math.PI / 6, Math.PI / 2)
         ctx.lineTo(innerRadius * Math.cos(Math.PI / 6), innerRadius * Math.sin(Math.PI / 6))
-        ctx.fillRect(innerRadius * Math.cos(Math.PI / 6), innerRadius * Math.sin(Math.PI / 6), 15, 15)
         ctx.arc(0, 0, innerRadius, Math.PI / 6, Math.PI / 6 - Math.PI / 3 * 2, true)
         ctx.closePath()
         ctx.fillStyle = color[i]
