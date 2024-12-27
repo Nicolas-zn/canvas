@@ -31,7 +31,7 @@ function get_application_name(name: string) {
 }
 
 onMounted(() => {
-  changeComponent(components['parking.vue'])
+  changeComponent(components['aa_home_page.vue'])
 })
 </script>
 

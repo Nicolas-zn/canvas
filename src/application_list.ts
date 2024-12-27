@@ -120,6 +120,9 @@ let application_list = [
     {
         component_name: 'national_flag_italy', application_name: '国旗-意大利🇮🇹'
     },
+    {
+        component_name: 'aa_home_page', application_name: '简介'
+    },
 ]
 
 export default application_list
