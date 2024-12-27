@@ -51,17 +51,11 @@ function drawSign(ctx: CanvasRenderingContext2D) {
 
         ctx.moveTo(circleRadius * Math.cos(i * angle), circleRadius * Math.sin(i * angle))
         ctx.bezierCurveTo(cp1[0], cp1[1], cp2[0], cp2[1], circleRadius * Math.cos((i + 1) * angle), circleRadius * Math.sin((i + 1) * angle))
+        let c_angle = i * angle + angle / 2
 
-
-        let spit = 0.3
         if (i < 4) {
             ctx.lineTo(0, 0)
         } else {
-            // let xy = [circleRadius * Math.cos(i * angle), circleRadius * Math.sin(i * angle)]
-            // let xy2 = [circleRadius * Math.cos((i + 1) * angle), circleRadius * Math.sin((i + 1) * angle)]
-            // ctx.lineTo((xy2[0] - center[0]) * spit, (xy2[1] - center[1]) * spit)
-            // ctx.lineTo((xy[0] - center[0]) * spit, (xy[1] - center[1]) * spit)
-
             ctx.lineTo(center[0] * 0.2, center[1] * 0.2)
         }
 
@@ -73,12 +67,11 @@ function drawSign(ctx: CanvasRenderingContext2D) {
         } else {
             ctx.fillStyle = 'orange'
             ctx.fill()
+            let c = [circleRadius * Math.cos(c_angle) * 0.3, circleRadius * Math.sin(c_angle) * 0.3]
+            ctx.beginPath()
+            console.log();
 
-            // let cha = (circleRadius * Math.cos(i * angle) - circleRadius * Math.cos((i + 1) * angle)) / 2,
-            //     cha2 = (circleRadius * Math.sin(i * angle) - circleRadius * Math.sin((i + 1) * angle)) / 2
-
-            // let len = Math.sqrt(cha * cha + cha2 * cha2), rad = len * spit / 2
-            // drawCircle([center[0] * spit, center[1] * spit], rad)
+            drawCircle(c, Math.tan(angle / 2) * 0.1 * circleRadius)
         }
     }
 
@@ -92,8 +85,10 @@ function drawSign(ctx: CanvasRenderingContext2D) {
 
 
     // 圆心
-    function drawCircle(center: [number, number], rad: number) {
-        ctx.arc(center[0], center[1], rad, Math.PI * 1.5, Math.PI * 0.5)
+    function drawCircle(center: number[], rad: number) {
+        ctx.fillStyle = 'black'
+
+        ctx.arc(center[0], center[1], rad, 0, Math.PI * 2)
         ctx.fill()
     }
 
