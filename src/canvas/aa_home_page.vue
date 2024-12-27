@@ -35,7 +35,7 @@ import friendly_links from '../../friendly_links'
                 <div style="width: 5px;"></div>
                 <div>
                     <span v-if="index < 2">
-                        <a :href="value">{{ value }}</a>
+                        <a :href="value" target="_blank">{{ value }}</a>
                     </span>
                     <span v-else>{{ value }}</span>
                 </div>
@@ -49,7 +49,7 @@ import friendly_links from '../../friendly_links'
                 <div style="width: 5px;"></div>
                 <div>
                     <span>
-                        <a :href="value">{{ value }}</a>
+                        <a :href="value" target="_blank">{{ value }}</a>
                     </span>
                 </div>
             </div>
