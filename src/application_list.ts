@@ -94,13 +94,16 @@ let application_list = [
         component_name: 'car_logo_xiaomi', application_name: '车标-小米'
     },
     {
-        component_name: 'national_flag_usa', application_name: '国旗-美国'
+        component_name: 'national_flag_usa', application_name: '国旗-美国🇺🇸'
     },
     {
-        component_name: 'national_flag_japan', application_name: '国旗-日本'
+        component_name: 'national_flag_japan', application_name: '国旗-日本🇯🇵'
     },
     {
-        component_name: 'national_flag_russia', application_name: '国旗-俄罗斯'
+        component_name: 'national_flag_russia', application_name: '国旗-俄罗斯🇷🇺'
+    },
+    {
+        component_name: 'national_flag_ukraine', application_name: '国旗-乌克兰🇺🇦'
     },
 ]
 
