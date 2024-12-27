@@ -108,6 +108,9 @@ let application_list = [
     {
         component_name: 'national_flag_north_korea', application_name: '国旗-朝鲜🇰🇵'
     },
+    {
+        component_name: 'national_flag_south_korea', application_name: '国旗-韩国🇰🇷'
+    },
 ]
 
 export default application_list
