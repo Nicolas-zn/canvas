@@ -40,17 +40,19 @@ function drawSign(ctx: CanvasRenderingContext2D) {
         ctx.beginPath()
         // ctx.moveTo(0, 0)
         // ctx.lineTo(circleRadius * Math.cos(i * angle), circleRadius * Math.sin(i * angle))
+        let little = 0
+        if (i > 3) {
+            little = Math.PI / 360
+        }
         let center = [
-            (circleRadius * Math.cos(i * angle) + circleRadius * Math.cos((i + 1) * angle)) / 2,
-            (circleRadius * Math.sin(i * angle) + circleRadius * Math.sin((i + 1) * angle)) / 2,
+            (circleRadius * Math.cos(i * angle + little) + circleRadius * Math.cos((i + 1) * angle + little)) / 2,
+            (circleRadius * Math.sin(i * angle - little) + circleRadius * Math.sin((i + 1) * angle + little)) / 2,
         ]
-
-
         let cp1 = [center[0] * 1.2, center[1] * 1.2]
         let cp2 = [center[0] * 1.2, center[1] * 1.2]
 
-        ctx.moveTo(circleRadius * Math.cos(i * angle), circleRadius * Math.sin(i * angle))
-        ctx.bezierCurveTo(cp1[0], cp1[1], cp2[0], cp2[1], circleRadius * Math.cos((i + 1) * angle), circleRadius * Math.sin((i + 1) * angle))
+        ctx.moveTo(circleRadius * Math.cos(i * angle + little), circleRadius * Math.sin(i * angle + little))
+        ctx.bezierCurveTo(cp1[0], cp1[1], cp2[0], cp2[1], circleRadius * Math.cos((i + 1) * angle - little), circleRadius * Math.sin((i + 1) * angle - little))
         let c_angle = i * angle + angle / 2
 
         if (i < 4) {
@@ -68,38 +70,43 @@ function drawSign(ctx: CanvasRenderingContext2D) {
             ctx.fillStyle = 'orange'
             ctx.fill()
             let c = [circleRadius * Math.cos(c_angle) * 0.3, circleRadius * Math.sin(c_angle) * 0.3]
+            // ctx.beginPath()
+            let angle_ = Math.PI * 1.5
+            if (i === 4) {
+                angle_ = Math.PI * 1.4
+            }
+            let x = [center[0] * 0.2, center[1] * 0.2]
             ctx.beginPath()
-            console.log();
-
-            drawCircle(c, Math.tan(angle / 2) * 0.1 * circleRadius)
+            drawCircle(c, Math.tan(angle / 2) * 0.15 * circleRadius, angle_ + (i - 4) * Math.PI / 6, x)
         }
     }
 
     //ctx.restore()
     ctx.beginPath()
     ctx.moveTo(0, 0)
-    let inner_radius = circleRadius * 0.2
+    let inner_radius = circleRadius * 0.7
     ctx.arc(0, 0, inner_radius, angle * 4, Math.PI * 2)
-    ctx.fillStyle = 'black'
+    ctx.fillStyle = 'rgba(255,255,0,0.3)'
     ctx.fill()
 
 
     // 圆心
-    function drawCircle(center: number[], rad: number) {
-        ctx.fillStyle = 'black'
-
-        ctx.arc(center[0], center[1], rad, 0, Math.PI * 2)
+    function drawCircle(center: number[], rad: number, start: number, x: number[]) {
+        ctx.fillStyle = 'white'
+        ctx.moveTo(x[0], x[1])
+        ctx.arc(center[0], center[1], rad, start, start + Math.PI)
+        ctx.closePath()
         ctx.fill()
     }
 
-    ctx.restore()
-    function drawY() {
-        ctx.moveTo(0, canvas.height / 2)
-        ctx.lineTo(0, -canvas.height / 2)
-        ctx.lineWidth = 1
-        ctx.stroke()
-    }
-    drawY()
+    // ctx.restore()
+    // function drawY() {
+    //     ctx.moveTo(0, canvas.height / 2)
+    //     ctx.lineTo(0, -canvas.height / 2)
+    //     ctx.lineWidth = 1
+    //     ctx.stroke()
+    // }
+    // drawY()
 }
 
 onMounted(() => {
