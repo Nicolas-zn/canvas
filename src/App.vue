@@ -16,6 +16,7 @@ const changeComponent = (component: any, name = '停车位') => {
 }
 
 import application_list from './application_list';
+console.log(`当前图标数量：${application_list.length}`);
 
 function get_application_name(name: string) {
   const component_name = name
