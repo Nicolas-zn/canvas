@@ -124,7 +124,7 @@ let application_list = [
         component_name: 'aa_home_page', application_name: '简介'
     },
     {
-        component_name: 'oil_cnpc', application_name: '能源-中国石油'
+        component_name: 'energy_cnpc', application_name: '能源-中国石油'
     },
 ]
 
