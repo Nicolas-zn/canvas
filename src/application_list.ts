@@ -135,3 +135,5 @@ let application_list = [
 ]
 
 export default application_list
+let count = application_list.length
+export { count }

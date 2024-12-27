@@ -2,11 +2,20 @@
 <script lang="ts" setup>
 import author_info from '../../author_info'
 import friendly_links from '../../friendly_links'
+import { count } from '@/application_list';
 </script>
 <template>
     <div class="page">
         <div>
-            <h1>纯canvas实现的各类标志</h1>
+            <div style="display: flex;position: relative;">
+                <h1>纯canvas实现的各类标志</h1>
+                <div>
+                    <div style="color: red;position: relative;top: 50%;white-space: nowrap;">
+                        *当前案例数量：{{ count - 1 }}个
+                    </div>
+                </div>
+            </div>
+
             <ul>
                 <li>国旗</li>
                 <li>汽车</li>
