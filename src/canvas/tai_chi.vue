@@ -72,6 +72,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
     renderer.dispose()
+    renderer.domElement.remove()
 })
 onBeforeUnmount(() => {
     renderer.setAnimationLoop(null)

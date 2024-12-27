@@ -183,6 +183,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
     renderer.dispose()
+    renderer.domElement.remove()
 })
 
 // 3d逻辑

@@ -49,11 +49,13 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
     renderer.dispose()
+    renderer.domElement.remove()
 })
 
 
 onBeforeUnmount(() => {
     renderer.dispose()
+    renderer.domElement.remove()
 })
 // 3d逻辑
 let threeCon = ref()

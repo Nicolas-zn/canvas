@@ -104,6 +104,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
     renderer.dispose()
+    renderer.domElement.remove()
 })
 
 
