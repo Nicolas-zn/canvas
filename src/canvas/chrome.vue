@@ -46,7 +46,6 @@ function drawSign(ctx: CanvasRenderingContext2D) {
         ctx.fillStyle = color[i]
         ctx.fill()
         ctx.restore()
-        ctx.save()
     }
 
 
