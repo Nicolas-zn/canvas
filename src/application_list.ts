@@ -135,6 +135,9 @@ let application_list = [
     {
         component_name: 'nike', application_name: '耐克logo'
     },
+    {
+        component_name: 'adidas', application_name: '阿迪达斯三叶草'
+    },
 ]
 
 export default application_list
