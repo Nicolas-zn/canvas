@@ -138,6 +138,9 @@ let application_list = [
     {
         component_name: 'adidas', application_name: '阿迪达斯三叶草'
     },
+    {
+        component_name: 'beat', application_name: 'beat耳机'
+    },
 ]
 
 export default application_list
