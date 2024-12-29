@@ -1,4 +1,4 @@
-_<!-- canvas 禁止通行 -->
+_<!-- canvas nike -->
 <script lang="ts" setup>
 
 import { utils } from '@/utils';
