@@ -132,6 +132,9 @@ let application_list = [
     {
         component_name: 'chrome', application_name: 'chrome浏览器'
     },
+    {
+        component_name: 'nike', application_name: '耐克logo'
+    },
 ]
 
 export default application_list
