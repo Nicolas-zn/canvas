@@ -67,6 +67,9 @@ let application_list = [
         component_name: 'tai_chi', application_name: '太极'
     },
     {
+        component_name: 'tai_chi_single', application_name: '单个太极'
+    },
+    {
         component_name: 'security_camera', application_name: '监控摄像头'
     },
     {
