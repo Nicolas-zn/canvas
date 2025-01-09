@@ -147,6 +147,12 @@ let application_list = [
     {
         component_name: 'mastercard', application_name: '万事达'
     },
+    {
+        component_name: 'car_logo_nio', application_name: '车标-蔚来'
+    },
+    {
+        component_name: 'my_logo', application_name: 'logo_version1'
+    },
 ]
 
 export default application_list
