@@ -10,7 +10,7 @@ let canvasCon = ref()
 let canvas: HTMLCanvasElement
 function draw() {
     canvas = document.createElement('canvas')
-    canvas.style.border = '1px black solid'
+    // canvas.style.border = '1px black solid'
     canvas.height = 500
     canvas.width = 500
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
@@ -20,7 +20,14 @@ function draw() {
 
 
 function drawSign(ctx: CanvasRenderingContext2D) {
-    ctx.lineWidth = 8;
+
+    ctx.moveTo(0, 0)
+    ctx.lineTo(canvas.width, 0)
+    ctx.lineTo(canvas.width, canvas.height)
+    ctx.lineTo(0, canvas.height)
+    ctx.closePath()
+    ctx.stroke()
+    ctx.beginPath()
     let height = 50
     ctx.fillStyle = 'black'
     let text = 'THREE&CESIUM'
@@ -40,16 +47,21 @@ function drawSign(ctx: CanvasRenderingContext2D) {
     }
 
     ctx.restore()
-    ctx.scale(1.2, 8);
+    ctx.save()
+    ctx.scale(1.5, 8);
     let text2 = 'EXAMPLES'
     // ctx.textBaseline = 'middle'
     ctx.textAlign = 'center'
+    let offset = width / (text2.length * 1.58)
+
     ctx.font = `bold ${height * 0.8}px Arial`;
     for (let i = 0; i < text2.length; i++) {
         const char = text2[i];
-        let offset = width / text2.length
         if (i == 0) {
             offset = offset * 1.05
+        }
+        if (i == text2.length - 1) {
+            ctx.fillStyle = 'red'
         }
         ctx.fillText(char, offset * i + 20, 40 + 22)
     }
