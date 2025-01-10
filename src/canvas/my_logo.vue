@@ -36,23 +36,24 @@ function drawSign(ctx: CanvasRenderingContext2D) {
     ctx.font = `${height * 0.8}px Arial`;
     let width = canvas.width
     ctx.save()
-    ctx.scale(1, 8);
+    ctx.scale(1.5, 8);
+    let offset_1 = width / (text.length * 1.95)
+
     for (let i = 0; i < text.length; i++) {
         const char = text[i];
-        let offset = width / text.length
         if (i == 0) {
-            offset = offset * 1.25
+            offset_1 = offset_1 * 1.25
         }
-        ctx.fillText(char, offset * i + 15, 30)
+        ctx.fillText(char, offset_1 * i + 15, 30)
     }
 
     ctx.restore()
     ctx.save()
-    ctx.scale(1.5, 8);
+    ctx.scale(2, 8);
     let text2 = 'EXAMPLES'
     // ctx.textBaseline = 'middle'
     ctx.textAlign = 'center'
-    let offset = width / (text2.length * 1.58)
+    let offset = width / (text2.length * 2.2)
 
     ctx.font = `bold ${height * 0.8}px Arial`;
     for (let i = 0; i < text2.length; i++) {
