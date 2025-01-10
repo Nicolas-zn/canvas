@@ -153,6 +153,9 @@ let application_list = [
     {
         component_name: 'my_logo', application_name: 'logo_version1'
     },
+    {
+        component_name: 'my_open_three_logo', application_name: 'open_three_logo'
+    },
 ]
 
 export default application_list
