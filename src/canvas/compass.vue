@@ -3,35 +3,44 @@ _<!-- canvas 指南针 -->
 
 import { utils } from '@/utils';
 import { CanvasTexture, DoubleSide, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, WebGLRenderer } from 'three';
-import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import GUI from 'three/examples/jsm/libs/lil-gui.module.min.js';
-import { onBeforeUnmount, onMounted, ref } from 'vue';
-let canvasCon = ref()
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+let canvasCon = ref(), ctx: CanvasRenderingContext2D
 let canvas: HTMLCanvasElement
 function draw() {
     canvas = document.createElement('canvas')
     canvas.height = 400
     canvas.width = 400
-    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
-    drawSign(ctx)
+    ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+    drawSign()
     canvasCon.value.appendChild(canvas)
 }
 
-
-function drawSign(ctx: CanvasRenderingContext2D) {
+let circleRadius: number
+function drawSign() {
     ctx.lineWidth = 2;
     ctx.translate(canvas.width / 2, canvas.height / 2)
-    let circleRadius = canvas.width <= canvas.height
+    circleRadius = canvas.width <= canvas.height
         ? canvas.width / 2 - ctx.lineWidth
         : canvas.height / 2 - ctx.lineWidth;
     let outerRadius = circleRadius * 0.8
     let innerRadius = outerRadius * 0.8
     let scale = 1
+    ctx.save()
+    ctx.rotate(-Math.PI / 2)
     for (let i = 0; i < 360; i = i + 2) {
         scale = 1
         if (i % 30 == 0) {
             scale = 1.1
         }
+        ctx.strokeStyle = 'black'
+
+        if (
+            i == 0
+        ) {
+            ctx.strokeStyle = 'red'
+        }
+
         let p1x = innerRadius * Math.cos(Math.PI * i / 180)
         let p1y = -innerRadius * Math.sin(Math.PI * i / 180)
         let p2x = outerRadius * Math.cos(Math.PI * i / 180) * scale
@@ -41,8 +50,11 @@ function drawSign(ctx: CanvasRenderingContext2D) {
         ctx.lineTo(p2x, p2y)
         ctx.stroke()
     }
+    ctx.restore()
+    // ctx.rotate(-Math.PI / 2)
+
     function drawDirectionText() {
-        const texts = ['北', '东', '南', '西']
+        const texts = ['东', '北', '西', '南']
         let p = circleRadius * 0.9
         let coord = [
             [p, 0],
@@ -62,11 +74,11 @@ function drawSign(ctx: CanvasRenderingContext2D) {
 
 onMounted(() => {
     draw()
-    // three_logic()
-    // create_gui()
+    three_logic()
+    create_gui()
 })
 
-
+let angle = ref(0)
 window.addEventListener('mousemove', mouseMove)
 const centerX = window.innerWidth / 2;
 const centerY = window.innerHeight / 2;
@@ -86,33 +98,45 @@ function mouseMove(event: any) {
     if (angleInRadians < 0) {
         angleInRadians = angleInRadians + Math.PI * 2
     }
-    console.log(angleInRadians);
+    angle.value = angleInRadians
     // 将弧度转换为角度
-    let angleInDegrees = angleInRadians * (180 / Math.PI);
+    //  let angleInDegrees = angleInRadians * (180 / Math.PI);
 
     // 输出角度
-    console.log("Angle (in degrees):", angleInDegrees);
 
 }
-// onBeforeUnmount(() => {
-//     renderer.dispose()
-//     renderer.domElement.remove()
-// })
+
+watch(angle, () => {
+    ctx.resetTransform()
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    drawSign()
+    let px = Math.cos(angle.value) * circleRadius
+    let py = Math.sin(angle.value) * circleRadius
+    ctx.beginPath()
+    ctx.moveTo(0, 0)
+    ctx.lineTo(px, py)
+    ctx.stroke()
+    canvas_texture.needsUpdate = true
+})
+onBeforeUnmount(() => {
+    renderer.dispose()
+    renderer.domElement.remove()
+})
 
 // 3d逻辑
 let threeCon = ref()
 let canvas_texture: CanvasTexture
-let scene: Scene, camera: PerspectiveCamera, renderer: WebGLRenderer, controls: OrbitControls
+let scene: Scene, camera: PerspectiveCamera, renderer: WebGLRenderer
 function three_logic() {
     let domElement = threeCon.value as HTMLDivElement
-    ({ scene, camera, renderer, controls } = utils.initScene(domElement))
+    ({ scene, camera, renderer } = utils.initScene(domElement))
     camera.position.set(0, 10, 0)
     camera.lookAt(0, 0, 0)
-    controls.addEventListener('change', () => {
+    function animate() {
+        requestAnimationFrame(animate)
         renderer.render(scene, camera)
-    })
-
-
+    }
+    animate()
     canvas_texture = new CanvasTexture(canvas)
     canvas_texture.colorSpace = SRGBColorSpace
     const plane = new PlaneGeometry(5, 5)
@@ -179,12 +203,20 @@ function logCode() {
 <template>
     <div class="container">
         <div ref="canvasCon" class="canvasCon">
+            <div class="tip">
+                显示的是鼠标相对于屏幕中心点的方向
+            </div>
         </div>
         <div ref="threeCon" class="threeCon"></div>
+
     </div>
 </template>
 
 <style lang="scss" scoped>
+.tip {
+    position: fixed;
+}
+
 .container {
     position: relative;
     height: 100%;
