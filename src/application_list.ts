@@ -159,6 +159,9 @@ let application_list = [
     {
         component_name: 'threejs_logo', application_name: 'threejs_logo'
     },
+    {
+        component_name: 'compass', application_name: '指南针（罗盘）'
+    },
 ]
 
 export default application_list
