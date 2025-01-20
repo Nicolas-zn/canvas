@@ -55,11 +55,11 @@ function drawSign(ctx: CanvasRenderingContext2D) {
 
     ctx.restore()
     ctx.save()
-    ctx.scale(1, 8);
-    let text2 = 'ORGANIZATION'
+    ctx.scale(3, 8);
+    let text2 = 'TEAM'
     // ctx.textBaseline = 'middle'
     ctx.textAlign = 'center'
-    let offset = width / (text2.length * 1.1)
+    let offset = width / (text2.length * 3.1)
 
     ctx.font = `bold ${height * 0.8}px Arial`;
     for (let i = 0; i < text2.length; i++) {
@@ -67,10 +67,10 @@ function drawSign(ctx: CanvasRenderingContext2D) {
         ctx.fillStyle = 'black'
         if (i == 0) {
             offset = offset * 1.05
-            ctx.fillStyle = 'red'
+            // ctx.fillStyle = 'red'
         }
 
-        ctx.fillText(char, offset * i + 35, 40 + 22)
+        ctx.fillText(char, offset * i + 20, 40 + 22)
     }
 }
 
