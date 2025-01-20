@@ -121,6 +121,7 @@ watch(angle, () => {
 onBeforeUnmount(() => {
     renderer.dispose()
     renderer.domElement.remove()
+    window.removeEventListener('resize', mouseMove)
 })
 
 // 3d逻辑
