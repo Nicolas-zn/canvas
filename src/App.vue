@@ -37,8 +37,8 @@ onMounted(() => {
 
 <template>
   <div class="container">
-    <el-container class="container">
-      <el-aside>
+    <el-container class="flex-container">
+      <el-aside class="flex-aside">
         <el-menu>
           <el-menu-item v-for="(item, name) in components" :key="name" :index="name"
             @click="changeComponent(item, name)">
@@ -46,18 +46,39 @@ onMounted(() => {
           </el-menu-item>
         </el-menu>
       </el-aside>
-      <el-main>
+      <el-main class="flex-main">
         <component :is="current_component"></component>
       </el-main>
     </el-container>
-
   </div>
-
 </template>
 
 <style lang="scss" scoped>
 .container {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-container {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  width: 100%;
+}
+
+.flex-aside {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.flex-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
 }
 </style>
