@@ -1,4 +1,4 @@
-_<!-- canvas 越南(vinan)国旗 -->
+_<!-- canvas 越南(vietnam)国旗 -->
 <script lang="ts" setup>
 
 import { utils } from '@/utils';
