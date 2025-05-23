@@ -1,4 +1,4 @@
-_<!-- canvas america(usa)国旗 -->
+_<!-- canvas 越南(vinan)国旗 -->
 <script lang="ts" setup>
 
 import { utils } from '@/utils';
@@ -23,73 +23,37 @@ function drawSign(ctx: CanvasRenderingContext2D) {
 
 
     ctx.beginPath();
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "red";
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-    //条
-    ctx.fillStyle = 'red'
-    let offset = canvas.height / 13
-    for (let i = 0; i < 13; i++) {
-        if (i % 2 == 0) {
-            ctx.fillRect(0, 0 + offset * i, canvas.width, offset)
+    let centerX = canvas.width / 2, centerY = canvas.height / 2
+    ctx.translate(centerX, centerY)
+
+    const radius = canvas.height / 2 * 0.8
+    const innerRadius = radius * 0.4
+    ctx.beginPath()
+    ctx.fillStyle = "gold"
+    let spikes = 5, step = Math.PI * 2 / spikes, startAngle = Math.PI / 2 * 3, innerStartAngle = startAngle + Math.PI / 10 * 2
+    for (let i = 0; i < spikes; i++) {
+        const angle = startAngle + step * i
+        const x = Math.cos(angle) * radius
+        const y = Math.sin(angle) * radius
+        const innerAngle = innerStartAngle + step * i
+        const innerX = Math.cos(innerAngle) * innerRadius
+        const innerY = Math.sin(innerAngle) * innerRadius
+        if (i == 0) {
+            ctx.moveTo(x, y)
+            ctx.lineTo(innerX, innerY)
+        } else {
+            ctx.lineTo(x, y)
+            ctx.lineTo(innerX, innerY)
         }
-
     }
-
-
-    let blue_h = canvas.height * 7 / 13, blue_w = canvas.height
-
-    ctx.fillStyle = 'rgb(10,49,97)'
-    ctx.fillRect(0, 0, blue_w, blue_h)
+    ctx.closePath()
     ctx.fill()
 
-    // 绘制月亮
-    ctx.fillStyle = 'yellow'
-    // 绘制月亮
-    const centerX = blue_w * 0.4;
-    const centerY = blue_h / 2;
-    const outerRadius = blue_h * 0.4;
 
-    // 外圆
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, outerRadius, 0, Math.PI * 2, false);
-    ctx.fillStyle = 'yellow';
-    ctx.fill();
 
-    // 内圆
-    ctx.fillStyle = 'rgb(10,49,97)'
-
-    // ctx.globalCompositeOperation = 'destination-out'; // 切除部分
-    ctx.beginPath();
-    ctx.arc(centerX + 15, centerY, outerRadius * 0.95, 0, Math.PI * 2, false);
-    ctx.fill();
-    // ctx.globalCompositeOperation = 'source-over';
-
-    const starRadiusOuter = outerRadius * 0.5;
-    const starRadiusInner = starRadiusOuter * 0.5;
-    const starCenterX = centerX + outerRadius * 0.4;
-    const starCenterY = centerY;
-
-    ctx.beginPath();
-    for (let i = 0; i < 14; i++) {
-        const angle = (Math.PI * 2 / 14) * i;
-        const outerX = starCenterX + Math.cos(angle) * starRadiusOuter;
-        const outerY = starCenterY + Math.sin(angle) * starRadiusOuter;
-
-        const innerAngle = angle + Math.PI / 14;
-        const innerX = starCenterX + Math.cos(innerAngle) * starRadiusInner;
-        const innerY = starCenterY + Math.sin(innerAngle) * starRadiusInner;
-
-        if (i === 0) {
-            ctx.moveTo(outerX, outerY);
-        } else {
-            ctx.lineTo(outerX, outerY);
-        }
-        ctx.lineTo(innerX, innerY);
-    }
-    ctx.closePath();
-    ctx.fillStyle = 'yellow';
-    ctx.fill();
 }
 
 onMounted(() => {
